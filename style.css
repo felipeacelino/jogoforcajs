@@ -1,0 +1,24 @@
+body {
+	margin: 0;
+	padding: 0;
+	background-color: #FFFAD6;
+}
+
+input.input-letra {
+	width: 20px;
+	background: transparent;
+	border: none;
+	border-bottom: 3px solid #000;
+	margin-right: 5px; 
+	text-align: center;
+}
+
+.espaco {
+	width: 50px;
+	height: 50px;
+	background: red;
+}
+
+.hifen {
+	margin: 0px 10px;
+}
