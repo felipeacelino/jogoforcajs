@@ -1,7 +1,12 @@
 body {
 	margin: 0;
 	padding: 0;
-	background-color: #FFF;
+	background: url("imagens/fundo.jpg") no-repeat center center fixed;
+	-webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+   
 }
 
 div {
@@ -11,12 +16,13 @@ div {
 }
 
 h1 {
-	padding: 5px 0px;
+	padding: 0px 0px;
 	margin-top: 0px;
 	width: 100%;
 	text-align: center;
 	text-transform: uppercase;
 	color: #333;
+	font-family: 'Gloria Hallelujah', cursive;
 }
 
 .img-fundo {
@@ -26,38 +32,48 @@ h1 {
 	border: 1px solid red;
 }
 
-.categoria {
-	display: block;
-	position: absolute;
-	width: 100%;
-	height: auto;
-	padding: 0 5px;	
-	text-align: center;
-	margin: 10px 0px;
+@media only screen and (max-width: 768px) {
+	.img-fundo {
+		border: 1px solid green;
+	}
 }
 
-.categoria img {
-	width: 80px;
-	max-width: 100%;
-}	
+@media only screen and (max-width: 480px) {
+	.img-fundo {
+		border: 1px solid blue;
+	}
+}
+
+.categoria {
+	display: none;
+	background-color: #666;
+	width: 80%;
+	max-width: 300px;
+	height: auto;
+	padding: 5px;	
+	text-align: center;
+	margin: 0px auto;
+	margin-top: -20px;
+	border-radius: 10px;
+}
 
 .categoria label {
-	position: relative;
 	text-transform: uppercase;	
-	color: #666;
+	color: #FFF;
 	font-size: 20px;
-	font-weight: bold;	
-	margin-left: 20px;
-	top: -40px;
+	font-weight: normal;
+	font-family: 'Cabin', sans-serif;
 }	
 
 .palavra-container {
-	bottom: 35%;
+	position: fixed;
+	bottom: 250px;
 	width: 100%;
 	height: auto;
 	text-align: center;
 	padding: 0px 5px;
-	border: 1px solid red;
+	border: 0px solid red;
+	margin-top: 100px;
 }
 
 .palavra-container .posicao-letra {
@@ -65,23 +81,40 @@ h1 {
 	max-width: 50px;
 	height: 30px;
 	border: none;
-	border-bottom: 3px solid #666;
+	border-bottom: 3px solid #333;
 	background: transparent;
 	text-align: center;
 	font-weight: bold;
 	font-size: 20px;
 	color: #666;
+	font-family: 'Gloria Hallelujah', cursive;
+	margin-right: 5px;
 }
 
 .palavra-container .posicao-hifen,
 .palavra-container .posicao-espaco {
-	padding: 0px 10px;
+	padding: 0px 5px;
 	font-weight: bold;
 	font-size: 30px;
 	color: #666;
 }
 
+.tentativas {
+	display: none;
+	position: fixed;
+	width: 100%;
+	text-align: center;
+	bottom: 130px; 
+	color: #333;
+	font-family: 'Gloria Hallelujah', cursive;
+}
+
+.tentativas span {
+	font-size: 1.5em;
+}
+
 .teclado {
+	display: none;
 	position: fixed;
 	bottom: 0;
 	width: 100%;
@@ -90,6 +123,7 @@ h1 {
 	text-align: center;
 	padding: 10px 0px;
 	background: #111;
+	z-index: 9;
 }
 
 .teclado .teclado-row {
@@ -100,6 +134,7 @@ h1 {
 	margin-bottom: 5px;
 }
 
+.teclado .teclado-row .teclado-palavra-button,
 .teclado .teclado-row .teclado-button {
 	width: 8%;
 	height: 30px;
@@ -112,6 +147,7 @@ h1 {
 	outline: 0;
 	border-radius: 3px;
 	transition: all 0.3s ease-in-out;
+	font-family: 'Cabin', sans-serif;
 }
 
 .teclado .teclado-row .teclado-button:hover,
@@ -120,25 +156,135 @@ h1 {
 }
 
 .teclado .teclado-row .teclado-button-inative {
-	background: #CCC;
-	color: rgba(0,0,0,0.8);
+	background: #D86666;
+	color: #FFF;
 	cursor: default;
 }
 
 .teclado .teclado-row .teclado-button-inative:hover,
 .teclado .teclado-row .teclado-button-inative:active {
-	background: #CCC;
-	color: rgba(0,0,0,0.8);
+	background: #D86666;
+	color: #FFF;
 }	
 
 .teclado .teclado-row .teclado-button-valid {
-	background: rgba(0,255,0,1);
-	color: rgba(0,0,0,0.8);
+	background: #4ACF6C;
+	color: #FFF;
 	cursor: default;	
 }
 
 .teclado .teclado-row .teclado-button-valid:hover,
 .teclado .teclado-row .teclado-button-valid:active {
-	background: rgba(0,255,0,1);
-	color: rgba(0,0,0,0.8);
+	background: #4ACF6C;
+	color: #FFF;
+}
+
+.btn {
+	background: #088CD0;
+	color: #FFF;
+	padding: 10px;
+	border: none;
+	border-radius: 5px;
+	outline: none;
+	font-family: 'Cabin', sans-serif;
+	text-transform: uppercase;
+	transition: all 0.2s ease-in;
+	font-weight: bold;
+	-webkit-box-shadow: 0px 6px 8px -4px rgba(0,0,0,0.54);
+	-moz-box-shadow: 0px 6px 8px -4px rgba(0,0,0,0.54);
+	box-shadow: 0px 6px 8px -4px rgba(0,0,0,0.54);
+}
+
+.btn:active,
+.btn:hover {
+	background: #333;
+	cursor: pointer;
+}
+
+.btn-container {
+	width: 100%;
+	height: auto;
+	text-align: center;
+}
+
+.jogar-novamente-container {
+	display: none;
+	width: 100%;
+	position: fixed;
+	text-align: center;
+	bottom: 60px;
+}
+
+.escolha-palavra-container,
+.categorias-container {
+	display: none;
+	width: 90%;
+	max-width: 600px;
+	height: auto;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.escolha-palavra-container h2,
+.categorias-container h2 {
+	width: 100%;
+	font-family: 'Cabin', sans-serif;
+	text-align: left;
+}
+
+.categorias-container .lista-categorias {
+	padding: 0;
+    list-style-type: none;
+    text-align: left;
+}
+
+.categorias-container .lista-categorias li {
+	width: 100%;
+	height: auto;
+	margin-bottom: 10px;
+}
+
+.categorias-container .lista-categorias li:first-child {
+	margin-top: 50px;
+}
+
+.categorias-container .lista-categorias li:last-child {
+	margin-bottom: 50px;
+}
+
+.categorias-container .lista-categorias li input {
+	transform: scale(1.5);
+}
+
+.categorias-container .lista-categorias li i {
+	margin-left: 20px;
+	margin-right: 10px;
+}
+
+.categorias-container .lista-categorias li label {
+	width: 100%;
+	font-family: 'Cabin', sans-serif;
+	font-size: 20px;
+}
+
+.btn-confirma-categoria-container {
+	display: none;
+}
+
+.escolha-palavra-container input {
+	border: none;
+	background-color: transparent;
+	border-bottom: 3px solid #333;
+	width: 100%;
+	max-width: 250px;
+	height: 30px;
+	outline: none;
+	font-weight: bold;
+	font-size: 20px;
+	color: #666;
+	font-family: 'Gloria Hallelujah', cursive;
+	padding: 2px 20px;
+	text-transform: uppercase;
+	margin-top: 50px;
+	margin-bottom: 50px;
 }

@@ -2,9 +2,12 @@
 <html lang="pt-br">
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, ser-scalable=no">
 	<title>Jogo da forca!</title>
 
+	<link href="https://fonts.googleapis.com/css?family=Cabin|Gloria+Hallelujah" rel="stylesheet"> 
+
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="style.css">
 
 </head>
@@ -12,35 +15,60 @@
 
 	<h1>Jogo da Forca</h1>
 
-	<img src="imagens/fundo.png" class="img-fundo" />
+	<div class="categoria">
+		<label id="categoria">Frutas</label>
+	</div>
+
+	<!-- <img src="imagens/fundo.png" class="img-fundo" /> -->
 
 	<div id="palavra-container" class="palavra-container">
 		<!-- POSIÇÕES DA PALAVRA -->
-		<input type="text" maxlength="1" disabled="disabled" class="posicao-letra" value="">
-		<input type="text" maxlength="1" disabled="disabled" class="posicao-letra" value="">
-		<input type="text" maxlength="1" disabled="disabled" class="posicao-letra" value="">
-		<input type="text" maxlength="1" disabled="disabled" class="posicao-letra" value="">
-		<input type="text" maxlength="1" disabled="disabled" class="posicao-letra" value="">
-		<input type="text" maxlength="1" disabled="disabled" class="posicao-letra" value="">
-		<input type="text" maxlength="1" disabled="disabled" class="posicao-letra" value="">
 	</div>
 
-	<div id="categoria-animais" class="categoria">
-		<img src="imagens/animais.png">
-		<label>Animais</label>
+	<label class="tentativas">Tentativas Restantes: <span id="tentativas">0</span></label>
+
+	<div class="jogar-novamente-container">
+		<button class="btn" id="btn-jogar-novamente">
+			<i class="fa fa-undo" aria-hidden="true"></i>
+			Jogar Novamente
+		</button>
 	</div>
-	<!-- <div id="categoria-autos" class="categoria">
-		<img src="imagens/autos.png">
-		<label>Automóveis</label>
-	</div> -->
-	<!-- <div id="categoria-frutas" class="categoria">
-		<img src="imagens/frutas.png">
-		<label>Frutas</label>
-	</div> -->
-	<!-- <div id="categoria-objetos" class="categoria">
-		<img src="imagens/objetos.png">
-		<label>Objetos</label>
-	</div> -->
+
+	<div class="teclado" id="teclado-palavra">
+		<div class="teclado-row">
+			<button class="teclado-palavra-button" data-button-value="Q">Q</button>
+			<button class="teclado-palavra-button" data-button-value="W">W</button>
+			<button class="teclado-palavra-button" data-button-value="E">E</button>
+			<button class="teclado-palavra-button" data-button-value="R">R</button>
+			<button class="teclado-palavra-button" data-button-value="T">T</button>
+			<button class="teclado-palavra-button" data-button-value="Y">Y</button>
+			<button class="teclado-palavra-button" data-button-value="U">U</button>
+			<button class="teclado-palavra-button" data-button-value="I">I</button>
+			<button class="teclado-palavra-button" data-button-value="O">O</button>
+			<button class="teclado-palavra-button" data-button-value="P">P</button>
+		</div>
+		<div class="teclado-row">
+			<button class="teclado-palavra-button" data-button-value="A">A</button>
+			<button class="teclado-palavra-button" data-button-value="S">S</button>
+			<button class="teclado-palavra-button" data-button-value="D">D</button>
+			<button class="teclado-palavra-button" data-button-value="F">F</button>
+			<button class="teclado-palavra-button" data-button-value="G">G</button>
+			<button class="teclado-palavra-button" data-button-value="H">H</button>
+			<button class="teclado-palavra-button" data-button-value="J">J</button>
+			<button class="teclado-palavra-button" data-button-value="K">K</button>
+			<button class="teclado-palavra-button" data-button-value="L">L</button>
+			<button class="teclado-palavra-button" data-button-value="Ç">Ç</button>
+		</div>
+		<div class="teclado-row">
+			<button class="teclado-palavra-button" data-button-value="Z">Z</button>
+			<button class="teclado-palavra-button" data-button-value="X">X</button>
+			<button class="teclado-palavra-button" data-button-value="C">C</button>
+			<button class="teclado-palavra-button" data-button-value="V">V</button>
+			<button class="teclado-palavra-button" data-button-value="B">B</button>
+			<button class="teclado-palavra-button" data-button-value="N">N</button>
+			<button class="teclado-palavra-button" data-button-value="M">M</button>
+		</div>
+	</div>
 
 	<div class="teclado" id="teclado">
 		<div class="teclado-row">
@@ -77,7 +105,59 @@
 			<button class="teclado-button" data-button-value="M">M</button>
 		</div>
 	</div>
+
+	<div class="categorias-container">
+
+		<h2>Escolha uma categoria para começar!</h2>
+
+		<ul class="lista-categorias">
+			<li>
+				<label>
+					<input type="radio" name="categoria" class="categoria-radio" value="animais">
+					<i class="fa fa-paw" aria-hidden="true" style="color: #827C46"></i> Animais
+				</label>
+			</li>
+			<li>
+				<label>
+					<input type="radio" name="categoria" class="categoria-radio" value="frutas"> 
+					<i class="fa fa-apple" aria-hidden="true" style="color: #D86666"></i> Frutas
+				</label>
+			</li>
+			<li>
+				<label>
+					<input type="radio" name="categoria" class="categoria-radio" value="carros"> 
+					<i class="fa fa-car" aria-hidden="true" style="color: #088CD0"></i> Carros
+				</label>
+			</li>
+			<li>
+				<label>
+					<input type="radio" name="categoria" class="categoria-radio" value="objetos"> 
+					<i class="fa fa-glass" aria-hidden="true" style="color: #666"></i> Objetos
+				</label>
+			</li>
+		</ul>
+
+		<div class="btn-container btn-confirma-categoria-container">
+			<button id="btn-confirma-categoria" class="btn">
+				Continuar <i class="fa fa-arrow-right" aria-hidden="true"></i>
+			</button>
+		</div>
+
+	</div>
+
+	<div class="escolha-palavra-container">
+		<h2>Digite abaixo a palavra a ser advinhada: </h2>	
+		
+		<input type="text" id="palavra-input" maxlength="20" readonly="readonly">
+
+		<div class="btn-jogar-container btn-jogar">
+			<button id="btn-jogar" class="btn">
+				Começar <i class="fa fa-play" aria-hidden="true"></i>
+			</button>
+		</div>
+
+	</div>
 	
-<script type="text/javascript" src="scripts.js"></script>
+<script type="text/javascript" src="script.js"></script>
 </body>
 </html>
