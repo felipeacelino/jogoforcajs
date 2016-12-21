@@ -1,24 +1,144 @@
 body {
 	margin: 0;
 	padding: 0;
-	background-color: #FFFAD6;
+	background-color: #FFF;
 }
 
-input.input-letra {
-	width: 20px;
-	background: transparent;
-	border: none;
-	border-bottom: 3px solid #000;
-	margin-right: 5px; 
+div {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+h1 {
+	padding: 5px 0px;
+	margin-top: 0px;
+	width: 100%;
 	text-align: center;
+	text-transform: uppercase;
+	color: #333;
 }
 
-.espaco {
-	width: 50px;
-	height: 50px;
-	background: red;
+.img-fundo {
+	width: auto;
+	height: 20vh;
+	margin-left: 30px;
+	border: 1px solid red;
 }
 
-.hifen {
-	margin: 0px 10px;
+.categoria {
+	display: block;
+	position: absolute;
+	width: 100%;
+	height: auto;
+	padding: 0 5px;	
+	text-align: center;
+	margin: 10px 0px;
+}
+
+.categoria img {
+	width: 80px;
+	max-width: 100%;
+}	
+
+.categoria label {
+	position: relative;
+	text-transform: uppercase;	
+	color: #666;
+	font-size: 20px;
+	font-weight: bold;	
+	margin-left: 20px;
+	top: -40px;
+}	
+
+.palavra-container {
+	bottom: 35%;
+	width: 100%;
+	height: auto;
+	text-align: center;
+	padding: 0px 5px;
+	border: 1px solid red;
+}
+
+.palavra-container .posicao-letra {
+	width: 10%;
+	max-width: 50px;
+	height: 30px;
+	border: none;
+	border-bottom: 3px solid #666;
+	background: transparent;
+	text-align: center;
+	font-weight: bold;
+	font-size: 20px;
+	color: #666;
+}
+
+.palavra-container .posicao-hifen,
+.palavra-container .posicao-espaco {
+	padding: 0px 10px;
+	font-weight: bold;
+	font-size: 30px;
+	color: #666;
+}
+
+.teclado {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	height: auto;
+	margin: 0 auto;
+	text-align: center;
+	padding: 10px 0px;
+	background: #111;
+}
+
+.teclado .teclado-row {
+	width: 100%;
+	max-width: 700px;
+	clear: both;
+	margin: 0 auto;
+	margin-bottom: 5px;
+}
+
+.teclado .teclado-row .teclado-button {
+	width: 8%;
+	height: 30px;
+	background: #333;
+	border: 0px solid #333;
+	color: #fff;
+	font-weight: bold;
+	text-transform: uppercase;
+	cursor: pointer;
+	outline: 0;
+	border-radius: 3px;
+	transition: all 0.3s ease-in-out;
+}
+
+.teclado .teclado-row .teclado-button:hover,
+.teclado .teclado-row .teclado-button:active {
+	background: #222;
+}
+
+.teclado .teclado-row .teclado-button-inative {
+	background: #CCC;
+	color: rgba(0,0,0,0.8);
+	cursor: default;
+}
+
+.teclado .teclado-row .teclado-button-inative:hover,
+.teclado .teclado-row .teclado-button-inative:active {
+	background: #CCC;
+	color: rgba(0,0,0,0.8);
+}	
+
+.teclado .teclado-row .teclado-button-valid {
+	background: rgba(0,255,0,1);
+	color: rgba(0,0,0,0.8);
+	cursor: default;	
+}
+
+.teclado .teclado-row .teclado-button-valid:hover,
+.teclado .teclado-row .teclado-button-valid:active {
+	background: rgba(0,255,0,1);
+	color: rgba(0,0,0,0.8);
 }

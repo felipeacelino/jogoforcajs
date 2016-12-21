@@ -35,6 +35,19 @@
 	// Botão de confirmação da jogada
 	var btnConfirma = doc.querySelector('#btn-confirm');
 
+	// Teclado
+	var teclado = doc.querySelector('#teclado');
+
+	// Oculta o teclado
+	function ocultaTeclado() {
+		teclado.style.display = 'none';
+	}
+
+	// Exibe o teclado
+	function exibeTeclado() {
+		teclado.style.display = 'block';
+	}
+
 	// Replace do PHP (Arrays)
 	function str_replace(find, replace, string) {
 		var novaString = [];
@@ -182,8 +195,9 @@
 	});
 
 	btnConfirma.addEventListener('click', function(e) {
-		console.log(letrasJogadas);
-		efetuaJogada();
+		//console.log(letrasJogadas);
+		//efetuaJogada();
+		exibeTeclado();
 		e.preventDefault();
 	}, false);
 

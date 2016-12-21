@@ -10,25 +10,74 @@
 </head>
 <body>
 
-	<h1>Forca</h1>
-	<p><input type="text" maxlength="1" id="input" /></p>
-	<p><button id="btn-confirm">Confima</button></p>
+	<h1>Jogo da Forca</h1>
 
-	<div id="carrega_palavra"></div>
+	<img src="imagens/fundo.png" class="img-fundo" />
 
-	
-
-	<div>
-		<label>Tentativas Restantes</label>
-		<span id="tentativas">0</span>
+	<div id="palavra-container" class="palavra-container">
+		<!-- POSIÇÕES DA PALAVRA -->
+		<input type="text" maxlength="1" disabled="disabled" class="posicao-letra" value="">
+		<input type="text" maxlength="1" disabled="disabled" class="posicao-letra" value="">
+		<input type="text" maxlength="1" disabled="disabled" class="posicao-letra" value="">
+		<input type="text" maxlength="1" disabled="disabled" class="posicao-letra" value="">
+		<input type="text" maxlength="1" disabled="disabled" class="posicao-letra" value="">
+		<input type="text" maxlength="1" disabled="disabled" class="posicao-letra" value="">
+		<input type="text" maxlength="1" disabled="disabled" class="posicao-letra" value="">
 	</div>
 
-	<div>
-		<label>Acertos</label>
-		<span id="pontos">0</span>
+	<div id="categoria-animais" class="categoria">
+		<img src="imagens/animais.png">
+		<label>Animais</label>
+	</div>
+	<!-- <div id="categoria-autos" class="categoria">
+		<img src="imagens/autos.png">
+		<label>Automóveis</label>
+	</div> -->
+	<!-- <div id="categoria-frutas" class="categoria">
+		<img src="imagens/frutas.png">
+		<label>Frutas</label>
+	</div> -->
+	<!-- <div id="categoria-objetos" class="categoria">
+		<img src="imagens/objetos.png">
+		<label>Objetos</label>
+	</div> -->
+
+	<div class="teclado" id="teclado">
+		<div class="teclado-row">
+			<button class="teclado-button" data-button-value="Q">Q</button>
+			<button class="teclado-button" data-button-value="W">W</button>
+			<button class="teclado-button" data-button-value="E">E</button>
+			<button class="teclado-button" data-button-value="R">R</button>
+			<button class="teclado-button" data-button-value="T">T</button>
+			<button class="teclado-button" data-button-value="Y">Y</button>
+			<button class="teclado-button" data-button-value="U">U</button>
+			<button class="teclado-button" data-button-value="I">I</button>
+			<button class="teclado-button" data-button-value="O">O</button>
+			<button class="teclado-button" data-button-value="P">P</button>
+		</div>
+		<div class="teclado-row">
+			<button class="teclado-button" data-button-value="A">A</button>
+			<button class="teclado-button" data-button-value="S">S</button>
+			<button class="teclado-button" data-button-value="D">D</button>
+			<button class="teclado-button" data-button-value="F">F</button>
+			<button class="teclado-button" data-button-value="G">G</button>
+			<button class="teclado-button" data-button-value="H">H</button>
+			<button class="teclado-button" data-button-value="J">J</button>
+			<button class="teclado-button" data-button-value="K">K</button>
+			<button class="teclado-button" data-button-value="L">L</button>
+			<button class="teclado-button" data-button-value="Ç">Ç</button>
+		</div>
+		<div class="teclado-row">
+			<button class="teclado-button" data-button-value="Z">Z</button>
+			<button class="teclado-button" data-button-value="X">X</button>
+			<button class="teclado-button" data-button-value="C">C</button>
+			<button class="teclado-button" data-button-value="V">V</button>
+			<button class="teclado-button" data-button-value="B">B</button>
+			<button class="teclado-button" data-button-value="N">N</button>
+			<button class="teclado-button" data-button-value="M">M</button>
+		</div>
 	</div>
 	
-
-<script type="text/javascript" src="script.js"></script>
+<script type="text/javascript" src="scripts.js"></script>
 </body>
 </html>
