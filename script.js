@@ -257,6 +257,18 @@
 		return palavra;
 	}
 
+	// Limpa uma palavra removendo caracteres inválidos (Ignorando os acentos)
+	function limpaPalavraAcentos(palavra) {
+		var palavra = String(palavra);
+		palavra = palavra.toUpperCase();
+		palavra = palavra.trim();
+		palavra = palavra.replace(/\s|_+/g,' ');
+		palavra = palavra.replace(/\-+/g,'-');
+		palavra = palavra.replace(/\d+/ig,'');
+		palavra = palavra.replace(/[^A-Za-zÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ|\s|\-]+/ig,'');				
+		return palavra;
+	}
+
 	// Cria um array com as letras de uma palavra sem repetir as mesmas
 	function getArrayLetras(palavra) {
 		var arrayLetras2 = [];
@@ -302,7 +314,7 @@
 				addLetraJogada(letra);
 				if (verificaJogada(letra)) {
 					desabilitaTeclaAcerto(letra);
-					exibeLetra(arrayLetras.indexOf(letra));
+					exibeLetra(letra);
 					if (todasLetrasCorretas()) {
 						ocultaTeclado();
 						exibeWinner();
@@ -319,17 +331,24 @@
 
 	// Verifica se uma letra está correta
 	function verificaJogada(letraJogada) {
-		return arrayLetras.some(function(letra) {
+		var posicoesLetra = doc.querySelectorAll('.posicao-letra');
+		var posicoesLetraArray = [];
+		posicoesLetra.forEach(function(pos) {
+			posicoesLetraArray.push(limpaPalavra(pos.dataset.letraValue));
+		});
+		return posicoesLetraArray.some(function(letra) {
 			return letraJogada == letra;
 		});
 	}
 
 	// Exibe uma letra na tela
-	function exibeLetra(letraIndex) {
-		var posicoesLetra = doc.querySelectorAll('input[data-letra-index="' + letraIndex + '"]');
+	function exibeLetra(letra) {
+		var posicoesLetra = doc.querySelectorAll('.posicao-letra');
 		posicoesLetra.forEach(function(pos) {
-			pos.setAttribute('data-correta',true);
-			pos.value = arrayLetras[letraIndex];
+			if (limpaPalavra(pos.dataset.letraValue) == letra) {
+				pos.setAttribute('data-correta',true);
+				pos.value = pos.dataset.letraValue;
+			}
 		});
 	}
 
@@ -343,7 +362,7 @@
 	function exibePalavra() {
 		var posicoesPalavra = doc.querySelectorAll('.posicao-letra');
 		posicoesPalavra.forEach(function(pos) {
-			pos.value = arrayLetras[pos.dataset.letraIndex];
+			pos.value = pos.dataset.letraValue;
 		});
 	}
 	
@@ -360,7 +379,7 @@
 		exibeTeclado();
 		exibeTentativas();
 		exibePalavraPosicoes();
-		populaPosicoes(palavraLimpaArray);
+		populaPosicoes(limpaPalavraAcentos(campoPalavraInput.value).split(''));
 		exibeStickman();
 		updateStickman();
 	}
@@ -383,7 +402,7 @@
 				quantidadeLetras ++;
 				var letraInput = doc.createElement('input');
 				letraInput.setAttribute('type','text');
-				letraInput.setAttribute('data-letra-index', arrayLetras.indexOf(letra));
+				letraInput.setAttribute('data-letra-value', letra);
 				letraInput.setAttribute('maxlength','1');
 				letraInput.setAttribute('disabled','disabled');
 				letraInput.setAttribute('class','posicao-letra');
