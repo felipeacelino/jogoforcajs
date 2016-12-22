@@ -50,12 +50,6 @@ h1 {
 	}
 }
 
-@media all and (orientation: landscape) {
-	.stickman {
-		display: none !important;
-	}
-}
-
 .palavra-container {
 	position: fixed;
 	bottom: 200px;

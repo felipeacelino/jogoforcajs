@@ -16,7 +16,7 @@
 	// Array de letras já jogadas
 	var letrasJogadas = [];
 
-	// Array de letras da palavra
+	// Array de letras da palavra (Limpa)
 	var arrayLetras = [];
 
 	// Número de tentativas
@@ -218,7 +218,6 @@
 		efetuaJogada(this.dataset.buttonValue);
 	}
 	botoesTeclado.forEach(function(botao) {
-		console.log();
 		botao.addEventListener('click', clickBotaoTeclado, false);
 	}); 
 
@@ -246,29 +245,30 @@
 	// Limpa uma palavra removendo caracteres inválidos
 	function limpaPalavra(palavra) {
 		var palavra = String(palavra);
-		var find = ['á', 'à', 'ã', 'â', 'é', 'ê', 'í', 'ó', 'ô', 'õ', 'ú', 'ü', 'ç', 'Á', 'À', 'Ã', 'Â', 'É', 'Ê', 'Í', 'Ó', 'Ô', 'Õ', 'Ú', 'Ü', '&'];
-		var replace = ['a', 'a', 'a', 'a', 'e', 'e', 'i', 'o', 'o', 'o', 'u', 'u', 'c', 'A', 'A', 'A', 'A', 'E', 'E', 'I', 'O', 'O', 'O', 'U', 'U', 'e'];	
 		palavra = palavra.toUpperCase();
+		var find = ['Á', 'À', 'Ã', 'Â', 'É', 'Ê', 'Í', 'Ó', 'Ô', 'Õ', 'Ú', 'Ü', '&'];
+		var replace = ['A', 'A', 'A', 'A', 'E', 'E', 'I', 'O', 'O', 'O', 'U', 'U', 'E'];	
+		palavra = str_replace(find, replace, palavra);	
 		palavra = palavra.trim();
 		palavra = palavra.replace(/\s|_+/g,' ');
-		palavra = palavra.replace(/\d+/ig,'');
-		palavra = str_replace(find, replace, palavra);
-		palavra = palavra.replace(/[^\w|\s|-|Ç]+/ig,'');
+		palavra = palavra.replace(/\-+/g,'-');
+		palavra = palavra.replace(/\d+/ig,'');		
+		palavra = palavra.replace(/[^\w|\s|\-|Ç]+/ig,'');
 		return palavra;
 	}
 
 	// Cria um array com as letras de uma palavra sem repetir as mesmas
 	function getArrayLetras(palavra) {
-		var arrayLetras = [];
+		var arrayLetras2 = [];
 		palavra.replace(/[-|_|\s]+/ig,'').
 			split('').
 				forEach(function(letra, index) {	
-					!arrayLetras.some(function(letraGravada) {
+					!arrayLetras2.some(function(letraGravada) {
 						return letraGravada === letra;
-					}) ? arrayLetras.push(letra) : '';
-					return arrayLetras;
+					}) ? arrayLetras2.push(letra) : '';
+					return arrayLetras2;
 				});
-		return arrayLetras;
+		return arrayLetras2;
 	}
 
 	// Verifica se a letra é válida
