@@ -1,12 +1,12 @@
 body {
 	margin: 0;
 	padding: 0;
-	/*background: url("imagens/fundo.jpg") no-repeat center center fixed;
-	-webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;*/
-   
+	background-color: #FFF5C8;
+	background-image: url("imagens/fundo.jpg");
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	background-attachment: fixed;
+	background-position: center;
 }
 
 div {
