@@ -130,11 +130,32 @@
 		return value != ' ' && value.length > 0 && typeof value === 'string';
 	}
 
+	function resetGame() {
+		palavra = '';
+		palavraLimpaArray = [];
+		quantidadeLetras = 0;
+		letrasJogadas = [];
+		arrayLetras = [];
+		tentativas = 5;
+		tentativasContador.innerHTML = tentativas;
+		acertos = 0;
+		resetTeclado();
+		campoPalavraInput.value = '';
+		updateStickman();
+		ocultaTentativas();
+		ocultaTeclado();
+		ocultaCategoria();
+		exibeEscolhaCategoria();
+		ocultaGameOver();
+		ocultaWinner();
+		ocultaBtnJogarNovamente();
+		ocultaStickman();
+		ocultaPalavra();
+	}
+
 	// Evento de click no botão 'Jogar Novamente'
 	btnJogarNovamente.addEventListener('click', function(e) {
-		campoPalavraInput.value = '';
-		palavra = '';
-		win.location.reload();
+		resetGame(); 
 	}, false);
 
 	// Evento de click no botão 'Continuar' (Após escolher a categoria)
@@ -228,6 +249,16 @@
 		escolhePalavraContainer.style.display = 'block';
 	}
 
+	// Oculta o container da palavra
+	function ocultaPalavra() {
+		palavraContainer.style.display = 'none';
+	}
+
+	// Exibe o container da palavra
+	function exibePalavra() {
+		palavraContainer.style.display = 'block';
+	}
+
 	// Oculta as tentativas
 	function ocultaTentativas() {
 		tentativasContainer.style.display = 'none';
@@ -266,9 +297,18 @@
 	function clickBotaoTeclado() {
 		efetuaJogada(this.dataset.buttonValue);
 	}
-	botoesTeclado.forEach(function(botao1) {
-		botao1.addEventListener('click', clickBotaoTeclado, false);
+	botoesTeclado.forEach(function(botao) {
+		console.log();
+		botao.addEventListener('click', clickBotaoTeclado, false);
 	}); 
+
+	// Reseta o teclado
+	function resetTeclado() {
+		botoesTeclado.forEach(function(botao) {
+			botao.setAttribute('class', 'teclado-button');
+			botao.removeAttribute('disabled');
+		});
+	}
 
 	// Replace do PHP (Arrays)
 	function str_replace(find, replace, string) {
@@ -406,6 +446,7 @@
 
 	// Popula as posições das letras da palavra
 	function populaPosicoes(palavraLimpaArray) {
+		palavraContainer.innerHTML = '';
 		palavraLimpaArray.forEach(function(letra, index) {
 			if (letra === ' ') {
 				var palavraEspaco = doc.createElement('span');
