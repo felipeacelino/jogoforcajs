@@ -1,16 +1,6 @@
 (function(win, doc){
 	'use strict';
 
-	// Categoria
-	var categoriaGame = '';
-	
-	// Nomes das categorias	
-	var nomesCategorias = [];
-	nomesCategorias['animais'] = 'Animais';
-	nomesCategorias['carros'] = 'Carros';
-	nomesCategorias['frutas'] = 'Frutas';
-	nomesCategorias['objetos'] = 'Objetos';
-
 	// Palavra a ser advinhada
 	var palavra = '';
 
@@ -63,26 +53,8 @@
 	// Botão 'Jogar Novamente'
 	var btnJogarNovamente = doc.querySelector('#btn-jogar-novamente');
 
-	// Caixa de escolha da categoria
-	var escolheCategoriaContainer = doc.querySelector('.categorias-container');
-
-	// Categoria Container
-	var categoriaContainer = doc.querySelector('.categoria');
-
-	// Categoria
-	var categoriaDOM = doc.querySelector('#categoria');
-
 	// Caixa de escolha da palavra
 	var escolhePalavraContainer = doc.querySelector('.escolha-palavra-container');
-
-	// Intes (Categoria)
-	var itensCategoria = doc.querySelectorAll('.categoria-radio');
-
-	// Container 'Continuar' (Após escolher a categoria)
-	var btnContinuarCategoriaContainer = doc.querySelector('.btn-confirma-categoria-container');
-	
-	// Botão 'Continuar' (Após escolher a categoria)
-	var btnContinuarCategoria = doc.querySelector('#btn-confirma-categoria');
 
 	// Campo palavra a ser advinhada
 	var campoPalavraInput = doc.querySelector('#palavra-input');
@@ -144,48 +116,18 @@
 		updateStickman();
 		ocultaTentativas();
 		ocultaTeclado();
-		ocultaCategoria();
-		exibeEscolhaCategoria();
 		ocultaGameOver();
 		ocultaWinner();
 		ocultaBtnJogarNovamente();
 		ocultaStickman();
 		ocultaPalavraPosicoes();
+		exibeEscolhaPalavra();
 	}
 
 	// Evento de click no botão 'Jogar Novamente'
 	btnJogarNovamente.addEventListener('click', function(e) {
 		resetGame(); 
 	}, false);
-
-	// Evento de click no botão 'Continuar' (Após escolher a categoria)
-	btnContinuarCategoria.addEventListener('click', function(e) {
-		ocultaEscolhaCategoria();
-		exibeEscolhaPalavra();
-		exibeCategoria();
-		campoPalavraInput.focus();
-	}, false);
-
-	// Evento de click nas categorias
-	itensCategoria.forEach(function(categoria) {
-		categoria.addEventListener('click', escolheCategoria, false);
-	}); 
-
-	// Oculta botão Continuar' (Após escolher a categoria)
-	function ocultaBtnContinuarCategoria() {
-		btnContinuarCategoriaContainer.style.display = 'none';
-	}
-
-	// Exibe botão Continuar' (Após escolher a categoria)
-	function exibeBtnContinuarCategoria() {
-		btnContinuarCategoriaContainer.style.display = 'block';
-	}
-
-	// Função de escolha de categoria
-	function escolheCategoria() {
-		categoriaGame = this.value;
-		exibeBtnContinuarCategoria();
-	}
 
 	// Oculta botão 'Jogar Novamente'
 	function ocultaBtnJogarNovamente() {
@@ -215,28 +157,6 @@
 	// Exibe botão 'Jogar Novamente'
 	function exibeBtnJogarNovamente() {
 		btnJogarNovamenteContainer.style.display = 'block';
-	}
-
-	// Oculta Caixa de escolha da categoria
-	function ocultaEscolhaCategoria() {
-		escolheCategoriaContainer.style.display = 'none';
-	}
-
-	// Exibe Caixa de escolha da categoria
-	function exibeEscolhaCategoria() {
-		escolheCategoriaContainer.style.display = 'block';
-	}
-
-	// Oculta Categoria
-	function ocultaCategoria() {
-		categoriaContainer.style.display = 'none';
-	}
-
-	// Exibe Categoria
-	function exibeCategoria() {
-		categoriaContainer.style.display = 'block';
-		categoriaContainer.setAttribute('class','categoria ' + categoriaGame);
-		categoriaDOM.innerHTML = nomesCategorias[categoriaGame];
 	}
 
 	// Oculta Caixa de escolha da palavra
@@ -472,6 +392,6 @@
 		});
 	}
 
-	exibeEscolhaCategoria();
+	exibeEscolhaPalavra();
 
 }(window, document));
