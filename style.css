@@ -25,22 +25,22 @@ h1 {
 	font-family: 'Gloria Hallelujah', cursive;
 }
 
-.img-fundo {
-	width: auto;
-	height: 20vh;
-	margin-left: 30px;
-	border: 1px solid red;
+.stickman {
+	display: none;
+	width: 100%;
+	height: auto;
+	text-align: center;
+	margin-top: 50px;
+}
+
+.stickman img {
+	max-width: 100%;
+	width: 150px;
 }
 
 @media only screen and (max-width: 768px) {
-	.img-fundo {
-		border: 1px solid green;
-	}
-}
-
-@media only screen and (max-width: 480px) {
-	.img-fundo {
-		border: 1px solid blue;
+	.stickman img {
+		width: 100px;
 	}
 }
 
@@ -67,7 +67,7 @@ h1 {
 
 .palavra-container {
 	position: fixed;
-	bottom: 250px;
+	bottom: 200px;
 	width: 100%;
 	height: auto;
 	text-align: center;
@@ -134,7 +134,6 @@ h1 {
 	margin-bottom: 5px;
 }
 
-.teclado .teclado-row .teclado-palavra-button,
 .teclado .teclado-row .teclado-button {
 	width: 8%;
 	height: 30px;
@@ -180,11 +179,15 @@ h1 {
 }
 
 .btn {
+	width: 90%;
+	min-width: 200px;
+	max-width: 500px;
 	background: #088CD0;
 	color: #FFF;
-	padding: 10px;
+	padding: 20px 0px;
 	border: none;
 	border-radius: 5px;
+	font-size: 1.2em;
 	outline: none;
 	font-family: 'Cabin', sans-serif;
 	text-transform: uppercase;
@@ -195,9 +198,13 @@ h1 {
 	box-shadow: 0px 6px 8px -4px rgba(0,0,0,0.54);
 }
 
+.btn i {
+	margin-left: 10px;
+}	
+
 .btn:active,
 .btn:hover {
-	background: #333;
+	background: #666;
 	cursor: pointer;
 }
 
@@ -212,7 +219,35 @@ h1 {
 	width: 100%;
 	position: fixed;
 	text-align: center;
-	bottom: 60px;
+	bottom: 20px;
+}
+
+.game-over-container {
+	display: none;
+	width: 100%;
+	position: fixed;
+	text-align: center;
+	bottom: 100px;
+}
+
+.game-over-container button {
+	background: #D86666;
+	pointer-events: none;
+    cursor: default;
+}
+
+.winner-container {
+	display: none;
+	width: 100%;
+	position: fixed;
+	text-align: center;
+	bottom: 100px;
+}
+
+.winner-container button {
+	background: #4ACF6C;
+	pointer-events: none;
+    cursor: default;
 }
 
 .escolha-palavra-container,
@@ -229,7 +264,7 @@ h1 {
 .categorias-container h2 {
 	width: 100%;
 	font-family: 'Cabin', sans-serif;
-	text-align: left;
+	text-align: center;
 }
 
 .categorias-container .lista-categorias {
@@ -287,4 +322,23 @@ h1 {
 	text-transform: uppercase;
 	margin-top: 50px;
 	margin-bottom: 50px;
+	text-align: center;
+	letter-spacing: 3px;
+}
+
+.escolha-palavra-container input.invalid {
+	border-color: #D86666;
+}
+
+.animais {
+	background: #827C46 !important;
+}	
+.frutas {
+	background: #D86666 !important;
+}	
+.carros {
+	background: #088CD0 !important;
+}	
+.objetos {
+	background: #666 !important;
 }

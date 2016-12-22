@@ -11,6 +11,18 @@
 	nomesCategorias['frutas'] = 'Frutas';
 	nomesCategorias['objetos'] = 'Objetos';
 
+	// Palavra a ser advinhada
+	var palavra = '';
+
+	// Palavra Limpa
+	var palavraLimpa = '';
+
+	// Array da palavra (Dividida por caracter)
+	var palavraLimpaArray = [];
+
+	// Quantidades de letras da palavra
+	var quantidadeLetras = 0;
+
 	// Array de letras já jogadas
 	var letrasJogadas = [];
 
@@ -22,6 +34,7 @@
 
 	// Container de tentativas
 	var tentativasContainer = doc.querySelector('.tentativas');
+
 	// Contador de tentativas
 	var tentativasContador = doc.querySelector('#tentativas');
 	tentativasContador.innerHTML = tentativas;
@@ -38,11 +51,11 @@
 	// Botões teclado
 	var botoesTeclado = doc.querySelectorAll('.teclado-button');
 
-	// Teclado de escolha da palavra
-	var tecladoPalavra = doc.querySelector('#teclado-palavra');
+	// Container Game Over
+	var gameOver = doc.querySelector('.game-over-container');
 
-	// Botões teclado de escolha da palavra
-	var botoesTecladoPalavra = doc.querySelectorAll('.teclado-palavra-button');
+	// Container Vencedor
+	var winner = doc.querySelector('.winner-container');
 	
 	// Container botão 'Jogar Novamente'
 	var btnJogarNovamenteContainer = doc.querySelector('.jogar-novamente-container');
@@ -52,6 +65,12 @@
 
 	// Caixa de escolha da categoria
 	var escolheCategoriaContainer = doc.querySelector('.categorias-container');
+
+	// Categoria Container
+	var categoriaContainer = doc.querySelector('.categoria');
+
+	// Categoria
+	var categoriaDOM = doc.querySelector('#categoria');
 
 	// Caixa de escolha da palavra
 	var escolhePalavraContainer = doc.querySelector('.escolha-palavra-container');
@@ -65,11 +84,65 @@
 	// Botão 'Continuar' (Após escolher a categoria)
 	var btnContinuarCategoria = doc.querySelector('#btn-confirma-categoria');
 
+	// Campo palavra a ser advinhada
+	var campoPalavraInput = doc.querySelector('#palavra-input');
+
+	// Botão começar jogo
+	var btnComecarJogo = doc.querySelector('#btn-jogar');
+
+	// Container stickman
+	var stickmanContainer = doc.querySelector('.stickman');
+
+	// Imagem stickman
+	var imgStickman = doc.querySelector('#stickman');
+
+	// Exibe stickman
+	function exibeStickman() {
+		stickmanContainer.style.display = 'block';
+	}
+
+	// Oculta stickman
+	function ocultaStickman() {
+		stickmanContainer.style.display = 'none';
+	}
+
+	// Atualiza o stickman
+	function updateStickman() {
+		imgStickman.setAttribute('src', 'imagens/stickman' + tentativas + '.png');
+	}
+		
+	// Evento de click do botão começar jogo
+	btnComecarJogo.addEventListener('click', function(e) {
+		if (validaCampoPalavra()) {
+			campoPalavraInput.setAttribute('class','');
+			ocultaEscolhaPalavra();
+			iniciarJogo();
+		} else {
+			campoPalavraInput.value = '';
+			campoPalavraInput.setAttribute('class','invalid');
+			campoPalavraInput.focus();
+		}
+	}, false);
+
+	// Valida a palavra digitada
+	function validaCampoPalavra() {
+		var value = limpaPalavra(campoPalavraInput.value);
+		return value != ' ' && value.length > 0 && typeof value === 'string';
+	}
+
+	// Evento de click no botão 'Jogar Novamente'
+	btnJogarNovamente.addEventListener('click', function(e) {
+		campoPalavraInput.value = '';
+		palavra = '';
+		win.location.reload();
+	}, false);
+
 	// Evento de click no botão 'Continuar' (Após escolher a categoria)
 	btnContinuarCategoria.addEventListener('click', function(e) {
 		ocultaEscolhaCategoria();
 		exibeEscolhaPalavra();
-		exibeTecladoPalavra();
+		exibeCategoria();
+		campoPalavraInput.focus();
 	}, false);
 
 	// Evento de click nas categorias
@@ -95,12 +168,32 @@
 
 	// Oculta botão 'Jogar Novamente'
 	function ocultaBtnJogarNovamente() {
-		btnJogarNovamente.style.display = 'none';
+		btnJogarNovamenteContainer.style.display = 'none';
+	}
+
+	// Exibe Game Over
+	function exibeGameOver() {
+		gameOver.style.display = 'block';
+	}
+
+	// Oculta Game Over
+	function ocultaGameOver() {
+		gameOver.style.display = 'none';
+	}
+
+	// Exibe Winner
+	function exibeWinner() {
+		winner.style.display = 'block';
+	}
+
+	// Oculta Winner
+	function ocultaWinner() {
+		winner.style.display = 'none';
 	}
 
 	// Exibe botão 'Jogar Novamente'
 	function exibeBtnJogarNovamente() {
-		btnJogarNovamente.style.display = 'block';
+		btnJogarNovamenteContainer.style.display = 'block';
 	}
 
 	// Oculta Caixa de escolha da categoria
@@ -111,6 +204,18 @@
 	// Exibe Caixa de escolha da categoria
 	function exibeEscolhaCategoria() {
 		escolheCategoriaContainer.style.display = 'block';
+	}
+
+	// Oculta Categoria
+	function ocultaCategoria() {
+		categoriaContainer.style.display = 'none';
+	}
+
+	// Exibe Categoria
+	function exibeCategoria() {
+		categoriaContainer.style.display = 'block';
+		categoriaContainer.setAttribute('class','categoria ' + categoriaGame);
+		categoriaDOM.innerHTML = nomesCategorias[categoriaGame];
 	}
 
 	// Oculta Caixa de escolha da palavra
@@ -143,16 +248,6 @@
 		teclado.style.display = 'block';
 	}
 
-	// Oculta o teclado de escolha da palavra
-	function ocultaTecladoPalavra() {
-		tecladoPalavra.style.display = 'none';
-	}
-
-	// Exibe o teclado de escolha da palavra
-	function exibeTecladoPalavra() {
-		tecladoPalavra.style.display = 'block';
-	}
-
 	// Desabilita uma tecla do teclado quando a jogada for errada
 	function desabilitaTeclaErro(tecla) {
 		var teclaDesativada = doc.querySelector('button[data-button-value="' + tecla + '"]');
@@ -169,20 +264,10 @@
 
 	// Evento de click nos botões do teclado
 	function clickBotaoTeclado() {
-		console.log(this.dataset.buttonValue);
 		efetuaJogada(this.dataset.buttonValue);
 	}
 	botoesTeclado.forEach(function(botao1) {
 		botao1.addEventListener('click', clickBotaoTeclado, false);
-	}); 
-
-	// Evento de click nos botões do teclado de escolha da palavra
-	function clickBotaoTecladoPalavra() {
-		console.log(this.dataset.buttonValue);
-		//efetuaJogada(this.dataset.buttonValue);
-	}
-	botoesTecladoPalavra.forEach(function(botao2) {
-		botao2.addEventListener('click', clickBotaoTecladoPalavra, false);
 	}); 
 
 	// Replace do PHP (Arrays)
@@ -208,7 +293,7 @@
 		palavra = palavra.replace(/\s|_+/g,' ');
 		palavra = palavra.replace(/\d+/ig,'');
 		palavra = str_replace(find, replace, palavra);
-		palavra = palavra.replace(/[^\w|\s|-]+/ig,'');
+		palavra = palavra.replace(/[^\w|\s|-|Ç]+/ig,'');
 		return palavra;
 	}
 
@@ -239,12 +324,13 @@
 	// Atualiza as tentativas
 	function atualizaTentativas() {
 		tentativas--;
+		updateStickman();
 		if (tentativas <= 0) {
-			console.log('Game-over');
+			exibeGameOver();
 			ocultaTeclado();
 			exibePalavra();
+			exibeBtnJogarNovamente();
 		} else {
-			console.log('Errou');
 			tentativasContador.innerHTML = tentativas;
 		}		
 	}
@@ -255,9 +341,14 @@
 			if (!verificaLetraJogada(letra)) {
 				addLetraJogada(letra);
 				if (verificaJogada(letra)) {
-					console.log('Acertou!');
 					desabilitaTeclaAcerto(letra);
 					exibeLetra(arrayLetras.indexOf(letra));
+					if (todasLetrasCorretas()) {
+						ocultaTeclado();
+						exibeWinner();
+						exibeBtnJogarNovamente();	
+						ocultaTentativas();					
+					}
 				} else {
 					desabilitaTeclaErro(letra);
 					atualizaTentativas();
@@ -277,8 +368,15 @@
 	function exibeLetra(letraIndex) {
 		var posicoesLetra = doc.querySelectorAll('input[data-letra-index="' + letraIndex + '"]');
 		posicoesLetra.forEach(function(pos) {
+			pos.setAttribute('data-correta',true);
 			pos.value = arrayLetras[letraIndex];
 		});
+	}
+
+	// Verifica se todas as letras estão corretas
+	function todasLetrasCorretas() {
+		var letrasCorretas = doc.querySelectorAll('input[data-correta="true"]');
+		return letrasCorretas.length >= quantidadeLetras;
 	}
 
 	// Exibe a palavra inteira
@@ -294,8 +392,20 @@
 		letrasJogadas.push(letra);
 	}
 
+	// Inicia um novo jogo
+	function iniciarJogo() {
+		palavraLimpa = limpaPalavra(campoPalavraInput.value);
+		palavraLimpaArray = palavraLimpa.split('');
+		arrayLetras = getArrayLetras(palavraLimpa);
+		exibeTeclado();
+		exibeTentativas();
+		populaPosicoes(palavraLimpaArray);
+		exibeStickman();
+		updateStickman();
+	}
+
 	// Popula as posições das letras da palavra
-	function populaPosicoes(palavraArray) {
+	function populaPosicoes(palavraLimpaArray) {
 		palavraLimpaArray.forEach(function(letra, index) {
 			if (letra === ' ') {
 				var palavraEspaco = doc.createElement('span');
@@ -308,6 +418,7 @@
 				palavraHifen.innerHTML = '-';
 				palavraContainer.appendChild(palavraHifen);
 			} else {
+				quantidadeLetras ++;
 				var letraInput = doc.createElement('input');
 				letraInput.setAttribute('type','text');
 				letraInput.setAttribute('data-letra-index', arrayLetras.indexOf(letra));
@@ -320,15 +431,5 @@
 	}
 
 	exibeEscolhaCategoria();
-
-	/*// Palavra
-	var palavra = 'abacaxi';
-	var palavraLimpa = limpaPalavra(palavra);
-	var palavraLimpaArray = palavraLimpa.split('');
-
-	arrayLetras = getArrayLetras(palavraLimpa);
-
-	populaPosicoes(palavraLimpaArray);*/
-
 
 }(window, document));
