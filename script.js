@@ -439,6 +439,7 @@
 		arrayLetras = getArrayLetras(palavraLimpa);
 		exibeTeclado();
 		exibeTentativas();
+		exibePalavra();
 		populaPosicoes(palavraLimpaArray);
 		exibeStickman();
 		updateStickman();
