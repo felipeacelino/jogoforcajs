@@ -150,7 +150,7 @@
 		ocultaWinner();
 		ocultaBtnJogarNovamente();
 		ocultaStickman();
-		ocultaPalavra();
+		ocultaPalavraPosicoes();
 	}
 
 	// Evento de click no botão 'Jogar Novamente'
@@ -250,12 +250,12 @@
 	}
 
 	// Oculta o container da palavra
-	function ocultaPalavra() {
+	function ocultaPalavraPosicoes() {
 		palavraContainer.style.display = 'none';
 	}
 
 	// Exibe o container da palavra
-	function exibePalavra() {
+	function exibePalavraPosicoes() {
 		palavraContainer.style.display = 'block';
 	}
 
@@ -439,7 +439,7 @@
 		arrayLetras = getArrayLetras(palavraLimpa);
 		exibeTeclado();
 		exibeTentativas();
-		exibePalavra();
+		exibePalavraPosicoes();
 		populaPosicoes(palavraLimpaArray);
 		exibeStickman();
 		updateStickman();
