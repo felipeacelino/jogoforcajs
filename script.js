@@ -23,7 +23,7 @@
 	var tentativas = 5;
 
 	// Tempo limite (segundos)
-	var timerLimit = 10;
+	var timerLimit = 60;
 
 	// Timer do tempo limite
 	var timer = timerLimit
@@ -87,6 +87,7 @@
 			timer--;			
 			if (timer >= 0) {
 				timer <= 10 ? timerDOM.style.color = '#D86666' : timerDOM.style.color = '#333';
+				timer <= 10 ? timerDOM.parentElement.style.color = '#D86666' : timerDOM.parentElement.style.color = '#333';
 				timerDOM.innerHTML = timer;
 				iniciaTimer();
 			} else {
@@ -97,6 +98,8 @@
 
 	// Reinicia o timer
 	function reiniciaTimer() {
+		timerDOM.style.color = '#333';
+		timerDOM.parentElement.style.color = '#333';
 		pararTimer();
 		timer = timerLimit;
 		timerDOM.innerHTML = timer;
@@ -134,6 +137,20 @@
 			campoPalavraInput.setAttribute('class','invalid');
 			campoPalavraInput.focus();
 		}
+	}, false);
+	// Evento de click do botão começar jogo
+	campoPalavraInput.addEventListener('keypress', function(e) {
+		if (event.which == 13 || event.keyCode == 13) {
+        	if (validaCampoPalavra()) {
+				campoPalavraInput.setAttribute('class','');
+				ocultaEscolhaPalavra();
+				iniciarJogo();
+			} else {
+				campoPalavraInput.value = '';
+				campoPalavraInput.setAttribute('class','invalid');
+				campoPalavraInput.focus();
+			}
+   	 	}		
 	}, false);
 
 	// Valida a palavra digitada
@@ -207,6 +224,7 @@
 	// Exibe Caixa de escolha da palavra
 	function exibeEscolhaPalavra() {
 		escolhePalavraContainer.style.display = 'block';
+		campoPalavraInput.focus();
 	}
 
 	// Oculta o container da palavra
