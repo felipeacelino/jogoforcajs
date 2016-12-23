@@ -23,7 +23,10 @@
 		<!-- POSIÇÕES DA PALAVRA -->
 	</div>
 
-	<label class="tentativas">Tentativas Restantes: <span id="tentativas">0</span></label>
+	<div class="row-container">
+		<label class="tentativas">Tentativas: <span id="tentativas">0</span></label>
+		<label class="timer">Tempo: <span id="timer">30</span></label>
+	</div>
 
 	<div class="game-over-container">
 		<button class="btn">
@@ -85,7 +88,7 @@
 	<div class="escolha-palavra-container">
 		<h2>Digite abaixo a palavra a ser advinhada: </h2>	
 		
-		<input type="text" id="palavra-input" maxlength="20">
+		<input type="text" id="palavra-input" maxlength="40">
 
 		<div class="btn-jogar-container btn-jogar">
 			<button id="btn-jogar" class="btn">

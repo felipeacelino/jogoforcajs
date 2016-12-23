@@ -22,8 +22,21 @@
 	// Número de tentativas
 	var tentativas = 5;
 
+	// Tempo limite (segundos)
+	var timerLimit = 10;
+
+	// Timer do tempo limite
+	var timer = timerLimit
+
+	// Container do Timer
+	var timerDOM = doc.querySelector('#timer');
+	timerDOM.innerHTML = timer;
+
+	// Timer timeout
+	var timerTimeout;
+
 	// Container de tentativas
-	var tentativasContainer = doc.querySelector('.tentativas');
+	var tentativasContainer = doc.querySelector('.row-container');
 
 	// Contador de tentativas
 	var tentativasContador = doc.querySelector('#tentativas');
@@ -67,6 +80,33 @@
 
 	// Imagem stickman
 	var imgStickman = doc.querySelector('#stickman');
+
+	// Inicia o timer
+	function iniciaTimer() {
+		timerTimeout = setTimeout(function() {
+			timer--;			
+			if (timer >= 0) {
+				timer <= 10 ? timerDOM.style.color = '#D86666' : timerDOM.style.color = '#333';
+				timerDOM.innerHTML = timer;
+				iniciaTimer();
+			} else {
+				GameOver();
+			}
+		},1000);
+	}
+
+	// Reinicia o timer
+	function reiniciaTimer() {
+		pararTimer();
+		timer = timerLimit;
+		timerDOM.innerHTML = timer;
+		iniciaTimer();
+	}
+
+	// Para o timeout
+	function pararTimer() {
+		clearTimeout(timerTimeout);
+	}
 
 	// Exibe stickman
 	function exibeStickman() {
@@ -298,13 +338,22 @@
 		tentativas--;
 		updateStickman();
 		if (tentativas <= 0) {
-			exibeGameOver();
-			ocultaTeclado();
-			exibePalavra();
-			exibeBtnJogarNovamente();
+			GameOver();
 		} else {
 			tentativasContador.innerHTML = tentativas;
 		}		
+	}
+
+	// Game over
+	function GameOver() {
+		tentativas = 0;
+		updateStickman();
+		exibeGameOver();
+		ocultaTeclado();
+		exibePalavra();
+		exibeBtnJogarNovamente();
+		pararTimer();
+		ocultaTentativas();
 	}
 
 	// Efetua uma jogada
@@ -315,6 +364,7 @@
 				if (verificaJogada(letra)) {
 					desabilitaTeclaAcerto(letra);
 					exibeLetra(letra);
+					reiniciaTimer();
 					if (todasLetrasCorretas()) {
 						ocultaTeclado();
 						exibeWinner();
@@ -382,6 +432,7 @@
 		populaPosicoes(limpaPalavraAcentos(campoPalavraInput.value).split(''));
 		exibeStickman();
 		updateStickman();
+		reiniciaTimer();
 	}
 
 	// Popula as posições das letras da palavra

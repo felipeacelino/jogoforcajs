@@ -84,17 +84,32 @@ h1 {
 	color: #666;
 }
 
-.tentativas {
-	display: none;
+.row-container {
+	float: right;
 	position: fixed;
+	display: none;
 	width: 100%;
-	text-align: center;
 	bottom: 130px; 
+	padding: 0px 10px;
+}
+
+.tentativas {
+	float: left;
 	color: #333;
 	font-family: 'Gloria Hallelujah', cursive;
 }
 
 .tentativas span {
+	font-size: 1.5em;
+}
+
+.timer {
+	float: right;
+	color: #333;
+	font-family: 'Gloria Hallelujah', cursive;
+}
+
+.timer span {
 	font-size: 1.5em;
 }
 
