@@ -94,6 +94,7 @@ h1 {
 }
 
 .tentativas {
+	text-transform: uppercase;
 	float: left;
 	color: #333;
 	font-family: 'Gloria Hallelujah', cursive;
@@ -104,6 +105,7 @@ h1 {
 }
 
 .timer {
+	text-transform: uppercase;
 	float: right;
 	color: #333;
 	font-family: 'Gloria Hallelujah', cursive;
